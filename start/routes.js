@@ -23,22 +23,22 @@ Route.get('/about', ({ view, request, response })=> {
     return view.render('pages.about', {title: 'About'});
 })
 
-// Route.get('/user', ({ view, request, response })=> {
-//     console.log(request.url());
-//     let user = {
-//         id: 1,
-//         name: 'Chandra'
-//     }
+Route.get('/user', ({ view, request, response })=> {
+    console.log(request.url());
+    let user = {
+        id: 1,
+        name: 'Chandra'
+    }
 
-//     return response.json(user);
-// })
+    return response.json(user);
+}).as('userIndex');
 
 Route.get('/user/:name?', ({ params })=> {
     
     const data = params.name ?? 'guest';
     console.log(data);
     return 'Profile ' + data;
-})
+}).as('userName')
 
 Route.route('/user', ({request})=>{
     switch (request.method()) {

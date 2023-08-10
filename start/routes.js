@@ -16,4 +16,9 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.on('/').render('welcome')
+Route.on('/').render('pages.home', {title:'Home'})
+Route.on('/about').render('pages.about', {title: 'About'})
+
+Route.get('/welcome', ({ view })=> {
+    return view.render('welcome', {title: 'Welcome'});
+})

@@ -54,3 +54,7 @@ Route.route('/user', ({request})=>{
 Route.get('/welcome', ({ view })=> {
     return view.render('welcome', {title: 'Welcome'});
 })
+
+Route.any('/*', ({view})=>{
+ return view.render('404');
+});

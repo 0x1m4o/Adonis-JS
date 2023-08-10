@@ -17,8 +17,32 @@
 const Route = use('Route')
 
 Route.on('/').render('pages.home', {title:'Home'})
-Route.on('/about').render('pages.about', {title: 'About'})
 
+Route.get('/about', ({ view, request, response })=> {
+    console.log(request.url());
+    return view.render('pages.about', {title: 'About'});
+})
+
+Route.get('/user', ({ view, request, response })=> {
+    console.log(request.url());
+    let user = {
+        id: 1,
+        name: 'Chandra'
+    }
+
+    return response.json(user);
+})
+
+Route.route('/user', ({request})=>{
+    switch (request.method()) {
+        case 'POST':
+            return 'Post Method'; 
+        case 'DELETE':
+            return 'Delete Method'; 
+        default:
+            return 'Put Method';
+    }
+}, ['POST', 'PUT', 'DELETE'])
 Route.get('/welcome', ({ view })=> {
     return view.render('welcome', {title: 'Welcome'});
 })

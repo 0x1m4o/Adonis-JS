@@ -23,14 +23,21 @@ Route.get('/about', ({ view, request, response })=> {
     return view.render('pages.about', {title: 'About'});
 })
 
-Route.get('/user', ({ view, request, response })=> {
-    console.log(request.url());
-    let user = {
-        id: 1,
-        name: 'Chandra'
-    }
+// Route.get('/user', ({ view, request, response })=> {
+//     console.log(request.url());
+//     let user = {
+//         id: 1,
+//         name: 'Chandra'
+//     }
 
-    return response.json(user);
+//     return response.json(user);
+// })
+
+Route.get('/user/:name?', ({ params })=> {
+    
+    const data = params.name ?? 'guest';
+    console.log(data);
+    return 'Profile ' + data;
 })
 
 Route.route('/user', ({request})=>{
@@ -43,6 +50,7 @@ Route.route('/user', ({request})=>{
             return 'Put Method';
     }
 }, ['POST', 'PUT', 'DELETE'])
+
 Route.get('/welcome', ({ view })=> {
     return view.render('welcome', {title: 'Welcome'});
 })
